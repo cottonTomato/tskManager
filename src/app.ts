@@ -1,4 +1,5 @@
 import express from 'express';
+import { connect } from 'mongoose';
 import tasks from './routes/tasks';
 import { config } from 'dotenv';
 config();
@@ -10,6 +11,16 @@ const app = express();
 
 app.use(tasksBaseURL, tasks);
 
-app.listen(process.env.PORT ?? PORT, function () {
-    console.log(`Server Listininga at ${process.env.PORT ?? PORT}`);
-});
+async function start() {
+    try {
+        await connect(process.env.MONGOURI!);
+
+        app.listen(process.env.PORT ?? PORT, function () {
+            console.log(`Server Listininga at ${process.env.PORT ?? PORT}`);
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+start();
