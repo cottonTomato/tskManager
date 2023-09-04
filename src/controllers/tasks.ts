@@ -16,7 +16,7 @@ function deleteTask(req: Request, res: Response) {
     res.send('Job Sucess..');
 }
 
-function addTask(req: Request, res: Response) {
+function createTask(req: Request, res: Response) {
     res.send('Job Sucess..');
 }
 
@@ -26,5 +26,5 @@ export {
     getTask,
     updateTask,
     deleteTask,
-    addTask
+    createTask
 }
