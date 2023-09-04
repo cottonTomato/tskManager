@@ -13,7 +13,9 @@ app.use(tasksBaseURL, tasks);
 
 async function start() {
     try {
-        await connect(process.env.MONGOURI!);
+        const connection = await connect(process.env.MONGO_URI!, {
+            "dbName": "TaskManager"
+        });
 
         app.listen(process.env.PORT ?? PORT, function () {
             console.log(`Server Listininga at ${process.env.PORT ?? PORT}`);
