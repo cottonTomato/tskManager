@@ -6,8 +6,12 @@ interface ITask {
 }
 
 const taskSchema = new Schema<ITask>({
-    name: { type: String, required: true },
-    completed: { type: Boolean, required: true },
+    name: { type: String, 
+            required: [true, "Task name is Required"], 
+            maxlength: [20, "Task name must not exceed 20 charecters."], 
+            trim: true  },
+    completed: { type: Boolean, 
+            default: false },
 })
 
 const Task = model<ITask>('Task', taskSchema);
