@@ -19,7 +19,8 @@ async function start() {
 
         app.listen(process.env.PORT ?? PORT, function () {
             console.log(`Server Listininga at ${process.env.PORT ?? PORT}`);
-        });
+        }); 
+          
     } catch (err) {
         console.log(err);
     }
