@@ -10,16 +10,47 @@ async function getAllTasks(req: Request, res: Response) {
     }
 }
 
-function getTask(req: Request, res: Response) {
-    res.send('Job Sucess..');
+async function getTask(req: Request, res: Response) {
+    try {
+        const { id: taskId } = req.params;
+        const task = await Task.findById(taskId);
+
+        if (!task) {
+            res.status(404).json({ sucess: false, msg: `No Task with ID: ${taskId}`});
+            return;
+        }
+
+        res.status(200).json({ sucess: true, data: task });
+    } catch (err) {
+        res.status(500).json({ sucess: false, error: err });
+    }
 }
 
-function updateTask(req: Request, res: Response) {
-    res.send('Job Sucess..');
+async function updateTask(req: Request, res: Response) {
+    try {
+        const { id: taskId } = req.params;
+
+        const task = Task.findByIdAndUpdate(taskId, req.body, {
+            new: true,
+            runValidators: true
+        });
+
+        res.status(200).json({ sucess: true, data: task });
+    } catch (err) {
+        res.status(500).json({ sucess: false, error: err });
+    }
 }
 
-function deleteTask(req: Request, res: Response) {
-    res.send('Job Sucess..');
+async function deleteTask(req: Request, res: Response) {
+    try {
+        const { id: taskId } = req.params;
+
+        await Task.findOneAndDelete({ _id: taskId });
+
+        res.status(200).json({ sucess: true, msg: `Task with ID: ${taskId} Deleted`});
+    } catch (err) {
+        res.status(500).json({ sucess: false, error: err });
+    }
 }
 
 async function createTask(req: Request, res: Response) {
