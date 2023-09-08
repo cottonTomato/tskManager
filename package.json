@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "type": "commonjs",
   "scripts": {
-    "watch": "tsc-watch --onSuccess \"node dist/app.js\"",
+    "dev": "tsc-watch --onSuccess \"node dist/app.js\"",
     "start": "tsc && node dist/app.js",
     "build": "tsc"
   },
