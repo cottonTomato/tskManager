@@ -5,7 +5,7 @@ import { config } from 'dotenv';
 config();
 
 const tasksBaseURL = '/api/v1/tasks';
-const PORT = 3000;
+const PORT = process.env.PORT ?? 3000;
 
 const app = express();
 
@@ -17,7 +17,7 @@ async function start() {
             "dbName": "TaskManager"
         });
 
-        app.listen(process.env.PORT ?? PORT, function () {
+        app.listen(PORT, function () {
             console.log(`Server Listininga at ${process.env.PORT ?? PORT}`);
         }); 
           
